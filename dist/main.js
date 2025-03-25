@@ -30,6 +30,7 @@ const opportunities_js_1 = require("./opportunities.js");
             (0, jquery_1.default)(".nav-auth").html(`<a href="login.html" class="btn btn-success btn-sm">Log In</a>`);
         }
     }
+    
     (0, jquery_1.default)(document).ready(() => checkAuthentication());
     function displayHome() {
         setActiveNav('home');
@@ -209,4 +210,8 @@ const opportunities_js_1 = require("./opportunities.js");
         }
     }
     start();
+
+
+
+
 });
