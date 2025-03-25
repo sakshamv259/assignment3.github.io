@@ -30,22 +30,26 @@ $(function () {
         setActiveNav('home');
         console.log("Displaying Home Page...");
     }
-    function displayNews() {
-        setActiveNav('news');
+
+
+
+
+    window.displayNews = function displayNews() {
+        setActiveNav('news');  // Ensure this function exists in main.js
         const newsContainer = $("#news-container");
         newsContainer.empty();
         const apiKey = "883fb7ef-ff6e-4f57-b94f-22a972d7049b";
         const apiUrl = `https://api.goperigon.com/v1/all?category=Business&sourceGroup=top100&showReprints=false&apiKey=${apiKey}`;
+    
         $.ajax({
             url: apiUrl,
             method: "GET",
             success: function (data) {
-                var _a;
                 $("#loading").remove();
-                if (((_a = data.articles) === null || _a === void 0 ? void 0 : _a.length) > 0) {
+                if (data.articles?.length > 0) {
                     data.articles.forEach((article) => {
-                        var _a, _b;
-                        const imageUrl = (_a = article.imageUrl) !== null && _a !== void 0 ? _a : "public/img/news.jpg";
+                        const imageUrl = article.imageUrl || "public/img/news.jpg";
+                        const formattedDate = moment(article.pubDate).format("MMMM Do, YYYY");
                         const newsCard = `
                             <div class="card mb-3">
                                 <div class="row g-0">
@@ -55,8 +59,8 @@ $(function () {
                                     <div class="col-md-8">
                                         <div class="card-body">
                                             <h5 class="card-title">${article.title}</h5>
-                                            <p class="card-text">${(_b = article.description) !== null && _b !== void 0 ? _b : "No description available."}</p>
-                                            <p class="card-text"><small class="text-muted">Published on: ${moment(article.pubDate).format("MMMM Do, YYYY")}</small></p>
+                                            <p class="card-text">${article.description || "No description available."}</p>
+                                            <p class="card-text"><small class="text-muted">Published on: ${formattedDate}</small></p>
                                             <a href="${article.url}" target="_blank" class="btn btn-primary">Read More</a>
                                         </div>
                                     </div>
@@ -64,8 +68,7 @@ $(function () {
                             </div>`;
                         newsContainer.append(newsCard);
                     });
-                }
-                else {
+                } else {
                     newsContainer.append('<p class="text-center text-muted">No news articles found.</p>');
                 }
             },
@@ -74,7 +77,63 @@ $(function () {
                 newsContainer.append('<p class="text-danger text-center">Failed to load news. Please try again later.</p>');
             }
         });
-    }
+    };
+    
+    
+
+
+
+
+    
+    // function displayNews() {
+    //     setActiveNav('news');
+    //     const newsContainer = $("#news-container");
+    //     newsContainer.empty();
+    //     const apiKey = "883fb7ef-ff6e-4f57-b94f-22a972d7049b";
+    //     const apiUrl = `https://api.goperigon.com/v1/all?category=Business&sourceGroup=top100&showReprints=false&apiKey=${apiKey}`;
+    //     $.ajax({
+    //         url: apiUrl,
+    //         method: "GET",
+    //         success: function (data) {
+    //             var _a;
+    //             $("#loading").remove();
+    //             if (((_a = data.articles) === null || _a === void 0 ? void 0 : _a.length) > 0) {
+    //                 data.articles.forEach((article) => {
+    //                     var _a, _b;
+    //                     const imageUrl = (_a = article.imageUrl) !== null && _a !== void 0 ? _a : "public/img/news.jpg";
+    //                     const newsCard = `
+    //                         <div class="card mb-3">
+    //                             <div class="row g-0">
+    //                                 <div class="col-md-4">
+    //                                     <img src="${imageUrl}" class="img-fluid news-image" alt="news image">
+    //                                 </div>
+    //                                 <div class="col-md-8">
+    //                                     <div class="card-body">
+    //                                         <h5 class="card-title">${article.title}</h5>
+    //                                         <p class="card-text">${(_b = article.description) !== null && _b !== void 0 ? _b : "No description available."}</p>
+    //                                         <p class="card-text"><small class="text-muted">Published on: ${moment(article.pubDate).format("MMMM Do, YYYY")}</small></p>
+    //                                         <a href="${article.url}" target="_blank" class="btn btn-primary">Read More</a>
+    //                                     </div>
+    //                                 </div>
+    //                             </div>
+    //                         </div>`;
+    //                     newsContainer.append(newsCard);
+    //                 });
+    //             }
+    //             else {
+    //                 newsContainer.append('<p class="text-center text-muted">No news articles found.</p>');
+    //             }
+    //         },
+    //         error: function () {
+    //             $("#loading").remove();
+    //             newsContainer.append('<p class="text-danger text-center">Failed to load news. Please try again later.</p>');
+    //         }
+    //     });
+    // }
+
+
+
+
     function displayEventsPage() {
         setActiveNav('event');
         const $eventContainer = $('#calendar');

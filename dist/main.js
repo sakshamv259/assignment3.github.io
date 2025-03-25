@@ -36,6 +36,18 @@ const opportunities_js_1 = require("./opportunities.js");
         setActiveNav('home');
         console.log("Displaying Home Page...");
     }
+    function loadPage(page) {
+        fetch(`/Views/content/${page}`)
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById("main-content").innerHTML = html;
+                if (page === "statistics.html") {
+                    loadStatistics(); // Call function to load stats
+                }
+            })
+            .catch(error => console.error("Error loading page:", error));
+    }
+    
     function displayNews() {
         setActiveNav('news');
         const newsContainer = (0, jquery_1.default)("#news-container");

@@ -30,16 +30,15 @@
                     <li class="nav-item"><a href="news.html" class="navitm text-light nav-link">News</a></li>
                     <li class="nav-item"><a href="gallery.html" id="gal" class="navitm text-light nav-link active">Gallery</a></li>
                     <li class="nav-item dropdown">
-                        <a class="text-light nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                          More
+                        <a class="text-light nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+                            More
                         </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                          <li><a class="dropdown-item" href="#">Privacy Policy</a></li>
-                          <li><a class="dropdown-item" href="#">Terms of Service</a></li>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Privacy Policy</a></li>
+                            <li><a class="dropdown-item" href="#">Terms of Service</a></li>
                         </ul>
-                      </li>
-                      <li class="nav-item nav-auth"></li>
-
+                    </li>
+                    <li class="nav-item nav-auth"></li>
                 </ul>
             </div>
         </nav>
@@ -47,7 +46,32 @@
 
     <div class="container mt-4">
         <h2 class="text-center">Gallery</h2>
-        <div id="gallery-container" class="row mt-4"></div>
+        <div id="gallery-container" class="row mt-4">
+            <!-- Example Gallery Items -->
+            <div class="col-md-4 mb-3">
+                <a href="public/assets/gallery/image1.jpg" data-lightbox="gallery" data-title="Image 1">
+                    <img src="public/assets/gallery/image1.jpg" class="img-fluid rounded" alt="Gallery Image 1">
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="public/assets/gallery/image2.jpeg" data-lightbox="gallery" data-title="Image 2">
+                    <img src="public/assets/gallery/image2.jpeg" class="img-fluid rounded" alt="Gallery Image 2">
+                </a>
+            </div>
+            <div class="col-md-4 mb-3">
+                <a href="public/assets/gallery/image3.jpeg" data-lightbox="gallery" data-title="Image 3">
+                    <img src="public/assets/gallery/image3.jpeg" class="img-fluid rounded" alt="Gallery Image 3">
+                </a>
+            </div>            <div class="col-md-4 mb-3">
+                <a href="public/assets/gallery/image4.jpg" data-lightbox="gallery" data-title="Image 3">
+                    <img src="public/assets/gallery/image4.jpg" class="img-fluid rounded" alt="Gallery Image 3">
+                </a>
+            </div>            <div class="col-md-4 mb-3">
+                <a href="public/assets/gallery/image5.jpeg" data-lightbox="gallery" data-title="Image 3">
+                    <img src="public/assets/gallery/image5.jpeg" class="img-fluid rounded" alt="Gallery Image 3">
+                </a>
+            </div>
+        </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js"></script>

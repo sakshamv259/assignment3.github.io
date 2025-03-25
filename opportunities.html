@@ -1,6 +1,6 @@
-<!-- Name: Saksham Verma, Arsh-->
-<!-- Student ID: 100886325-->
-<!-- Date:23-02-2025 -->
+<!-- Name: Saksham Verma, Arsh -->
+<!-- Student ID: 100886325 -->
+<!-- Date: 23-02-2025 -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,21 +15,21 @@
 </head>
 <body>
   <header class="d-flex justify-content-center py-3 bg-dark">
-    <nav class="navbar navbar-expand-xl navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark">
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse navbar-custom-collapse" id="navbarNav">
+      <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-          <li class="nav-item"><a href="index.html" class="navitm text-light nav-link" id="home">Home</a></li>
-          <li class="nav-item"><a href="opportunities.html" class="navitm text-light nav-link active" id="opp">Opportunities</a></li>
-          <li class="nav-item"><a href="events.html" class="navitm text-light nav-link" id="event">Events</a></li>
-          <li class="nav-item"><a href="contact.html" class="navitm text-light nav-link" id="contact">Contact Us</a></li>
-          <li class="nav-item"><a href="about.html" class="navitm text-light nav-link" id="about">About</a></li>
-          <li class="nav-item"><a href="news.html" class="navitm text-light nav-link" id="news">News</a></li>
-          <li class="nav-item"><a href="gallery.html" class="navitm text-light nav-link">Gallery</a></li>
+          <li class="nav-item"><a href="index.html" class="nav-link text-light">Home</a></li>
+          <li class="nav-item"><a href="opportunities.html" class="nav-link text-light active">Opportunities</a></li>
+          <li class="nav-item"><a href="events.html" class="nav-link text-light">Events</a></li>
+          <li class="nav-item"><a href="contact.html" class="nav-link text-light">Contact Us</a></li>
+          <li class="nav-item"><a href="about.html" class="nav-link text-light">About</a></li>
+          <li class="nav-item"><a href="news.html" class="nav-link text-light">News</a></li>
+          <li class="nav-item"><a href="gallery.html" class="nav-link text-light">Gallery</a></li>
           <li class="nav-item dropdown">
-            <a class="text-light nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
+            <a class="nav-link dropdown-toggle text-light" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown">
               More
             </a>
             <ul class="dropdown-menu">
@@ -37,8 +37,6 @@
               <li><a class="dropdown-item" href="#">Terms of Service</a></li>
             </ul>
           </li>
-          <li class="nav-item nav-auth"></li>
-
         </ul>
       </div>
     </nav>
@@ -54,17 +52,19 @@
   </div>
 
   <!-- Container for Opportunities -->
-  <div class="my-5 card_holder container d-flex gap-4 flex-wrap"></div>
+  <div class="container my-5">
+    <div id="opportunitiesContainer" class="d-flex flex-wrap gap-4"></div>
+  </div>
 
   <!-- Modal for Signing Up -->
   <div class="modal fade" id="signupModal" tabindex="-1" aria-labelledby="signupModalLabel" aria-hidden="true">
-    <div class="modal-dialog d-flex justify-content-center">
-      <div class="modal-content w-75">
+    <div class="modal-dialog">
+      <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="signupModalLabel">Sign Up for Opportunity</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-        <div class="modal-body p-4">
+        <div class="modal-body">
           <form id="signupForm">
             <h6 id="opportunityTitle"></h6>
             <div class="mb-3">
@@ -79,7 +79,7 @@
               <label for="role" class="form-label">Role <span class="text-danger">*</span></label>
               <input type="text" id="role" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+            <button type="submit" class="btn btn-primary w-100">Submit</button>
           </form>
           <p id="confirmationMessage" class="text-success mt-3" style="display: none;"></p>
         </div>
@@ -87,7 +87,76 @@
     </div>
   </div>
 
-  <button id="backToTop" class="back-to-top">Back to Top</button>
+  <!-- Back to Top Button -->
+  <button id="backToTop" class="btn btn-secondary position-fixed bottom-0 end-0 m-3">Back to Top</button>
 
+  <script>
+    $(document).ready(function () {
+      // Sample data for opportunities (replace with API calls or dynamic data)
+      const opportunities = [
+        { title: "Software Engineer Internship", description: "An exciting internship for software engineers.", location: "Toronto, Canada" },
+        { title: "Data Science Bootcamp", description: "Learn data science with hands-on projects.", location: "Online" },
+        { title: "Marketing Coordinator", description: "Looking for a creative marketing specialist.", location: "Vancouver, Canada" }
+      ];
+
+      // Function to display opportunities
+      function loadOpportunities() {
+        let container = $("#opportunitiesContainer");
+        container.empty();
+        opportunities.forEach((opp, index) => {
+          let card = `
+            <div class="card shadow-sm" style="width: 18rem;">
+              <div class="card-body">
+                <h5 class="card-title">${opp.title}</h5>
+                <p class="card-text">${opp.description}</p>
+                <p class="text-muted">${opp.location}</p>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#signupModal" data-title="${opp.title}">Sign Up</button>
+              </div>
+            </div>
+          `;
+          container.append(card);
+        });
+      }
+
+      // Load opportunities on page load
+      loadOpportunities();
+
+      // Search functionality
+      $("#searchInput").on("keyup", function () {
+        let value = $(this).val().toLowerCase();
+        $(".card").filter(function () {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+        });
+      });
+
+      // Populate modal with selected opportunity title
+      $("#signupModal").on("show.bs.modal", function (event) {
+        let button = $(event.relatedTarget);
+        let title = button.data("title");
+        $("#opportunityTitle").text(`Signing up for: ${title}`);
+      });
+
+      // Handle form submission
+      $("#signupForm").submit(function (e) {
+        e.preventDefault();
+        $("#confirmationMessage").text("You have successfully signed up!").show();
+        setTimeout(() => $("#confirmationMessage").hide(), 3000);
+        $("#signupModal").modal("hide");
+      });
+
+      // Back to top button functionality
+      $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+          $("#backToTop").fadeIn();
+        } else {
+          $("#backToTop").fadeOut();
+        }
+      });
+
+      $("#backToTop").click(function () {
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+      });
+    });
+  </script>
 </body>
 </html>
