@@ -132,6 +132,14 @@ $(function () {
     // }
 
 
+    if (localStorage.getItem('loggedInUser')) {
+        navBarHtml += `
+            <li><a href="statistics.html"><i class="fa fa-chart-bar"></i> Statistics</a></li>
+        `;
+    }
+    
+
+
 
 
     function displayEventsPage() {
